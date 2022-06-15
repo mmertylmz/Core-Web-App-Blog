@@ -1,4 +1,5 @@
 //Libraries that I add.
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 
@@ -18,6 +19,15 @@ builder.Services.AddMvc(config =>
     config.Filters.Add(new AuthorizeFilter(policy));
 });
 
+//ReturnUrl komutu, Bu sayede hep aþaðýdaki yazdýðýmýz path'e döneceðiz.
+builder.Services.AddMvc();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(x =>
+    {
+        x.LoginPath = "/Login/Index";
+    });
+    
+
 
 //Insert your builder codes before this code below.
 var app = builder.Build();
@@ -36,6 +46,10 @@ app.UseStatusCodePagesWithReExecute("/ErrorPage/Error1","?code={0}");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseAuthentication(); //Authentication'u çalýþtýrmak için yazmamýz gereken komut
+
+//Session Kullanma Komutu.
+//app.UseSession();
 app.UseRouting();
 
 
