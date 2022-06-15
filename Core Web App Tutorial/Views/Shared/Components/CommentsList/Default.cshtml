@@ -1,0 +1,9 @@
+﻿@*@model List<CommentUser>*@
+@model IEnumerable<Core_Web_App_Tutorial.Models.CommentUser> 
+@*Yukarıdaki iki kod aynı şekilde sonuç veriyor*@
+
+	@foreach(var item in Model)
+	{
+		<p>@item.ID</p>
+		<p>@item.Username</p>
+	}
