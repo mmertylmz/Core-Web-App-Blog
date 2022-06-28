@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,12 @@ namespace EntityLayer.Concrete
     {
         [Key]
         public int BlogID { get; set; }
-        public string BlogTitle { get; set; }
-        public string BlogContent { get; set; }
-        public string BlogThumbnailImage { get; set; }
-        public string BlogImage { get; set; }
+        public string? BlogTitle { get; set; }
+        public string? BlogContent { get; set; }
+        public string? BlogThumbnailImage { get; set; }
+        public string? BlogImage { get; set; }
+
+        /*private DateTime blogCreateDate = DateTime.Now;*/
         public DateTime BlogCreateDate { get; set; }
         public bool BlogStatus { get; set; }
 
@@ -25,5 +28,6 @@ namespace EntityLayer.Concrete
         public Writer Writer { get; set; }
 
         public List<Comment> Comments { get; set; }
+       
     }
 }

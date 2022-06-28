@@ -24,6 +24,7 @@ namespace BusinessLayer.ValidationRules
                 .Matches(@"[\!\?\*\.]+").WithMessage("Şifrede en az bir sembol olmalıdır. '?','*','.','!')");
             RuleFor(x => x.WriterImage).NotEmpty().WithMessage("Dosya Yolu Boş olamaz");
 
+
         }
     }
 }

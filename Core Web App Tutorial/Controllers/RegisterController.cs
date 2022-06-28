@@ -28,7 +28,7 @@ namespace Core_Web_App_Tutorial.Controllers
             {
                 p.WriterAbout = "Deneme Test";
                 p.WriterStatus = true;
-                wm.WriterAdd(p);
+                wm.TAdd(p);
                 return RedirectToAction("Index", "Blog");
             }
             else
