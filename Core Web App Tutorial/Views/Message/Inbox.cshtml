@@ -1,0 +1,32 @@
+﻿@using EntityLayer.Concrete
+@model List<Message2>
+@{
+    ViewData["Title"] = "Inbox";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<h1>Gelen Kutusu</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Konu</th>
+        <th>Tarih</th>
+        <th>Gönderen</th>
+        <th>Mesajı Aç</th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <th>@item.MessageID</th>
+            <td>@item.Subject</td>
+            <td>@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
+            <td>@item.MessageSender.WriterName</td>
+            <td><a href="/Message/MessageDetails/@item.MessageID" class="btn btn-gradient-dark btn-rounded btn-fw">Mesajı Aç</a></td>
+        </tr>
+    }
+</table>
+<a href="/Blog/BlogAdd/" class="btn btn-gradient-primary btn-rounded btn-fw">Yeni Mesaj</a>
+

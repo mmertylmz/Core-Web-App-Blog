@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core_Web_App_Tutorial.Controllers
 {
-    [AllowAnonymous]
+
     public class DashboardController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());

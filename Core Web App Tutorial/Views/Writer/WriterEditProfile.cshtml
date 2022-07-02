@@ -1,8 +1,61 @@
-﻿
+﻿@model EntityLayer.Concrete.Writer
 @{
     ViewData["Title"] = "WriterEditProfile";
     Layout = "~/Views/Shared/WriterLayout.cshtml";
 }
 
-<h1>WriterEditProfile</h1>
+@using (Html.BeginForm("WriterEditProfile","Writer",FormMethod.Post))
+{
+<div class="col-12 grid-margin stretch-card">
+   <div class="card">
+      <div class="card-body">
+         <h4 class="card-title">Yazar Bilgileri Düzenle</h4>
+         <br />
+
+
+         @Html.HiddenFor(x=>x.WriterID, new {@class="form-control"})
+         @Html.HiddenFor(x=>x.WriterStatus, new{@class="form-control"})
+         @Html.HiddenFor(x=>x.WriterImage, new{@class="form-control"})
+
+         @*Check these Codes from above.*@
+
+         <form class="forms-sample">
+            <div class="form-group">
+               <label for="exampleInputName1">Yazar Ad Soyad</label>
+               <input type="text" class="form-control" id="exampleInputName1" asp-for="WriterName" placeholder="Ad">
+               @Html.ValidationMessageFor(x=>x.WriterName,"",new{@class="text-danger"})
+            </div>
+            <div class="form-group">
+               <label for="exampleInputEmail3">Email Adresi</label>
+               <input type="email" class="form-control" id="exampleInputEmail3" asp-for="WriterMail" placeholder="Email">
+               @Html.ValidationMessageFor(x=>x.WriterMail,"",new{@class="text-danger"})
+            </div>
+            <div class="form-group">
+               <label for="exampleInputPassword4">Şifre</label>
+               @Html.PasswordFor(x=>x.WriterPassword, new {@class="form-control"}) @*asp-for ile de html..for şeklinde de olur.*@
+               @Html.ValidationMessageFor(x=>x.WriterPassword,"",new{@class="text-danger"})
+            </div>
+            <div class="form-group">
+               <label>Yazar Görsel</label>
+               <input type="file" name="img[]" class="file-upload-default">
+               <div class="input-group col-xs-12">
+                  <input type="text" class="form-control file-upload-info" disabled placeholder="Resim Seç">
+                  <span class="input-group-append">
+                  <button class="file-upload-browse btn btn-gradient-primary" type="button">Resim Seç</button>
+                  @*@Html.ValidationMessageFor(x=>x.WriterImage,"",new{@class="text-danger"})*@
+                  </span>
+               </div>
+            </div>
+            <div class="form-group">
+               <label for="exampleTextarea1">Yazar Hakkında</label>
+               <textarea class="form-control" asp-for="WriterAbout" id="exampleTextarea1" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-gradient-primary mr-2">Güncelle</button>
+            <button class="btn btn-light">İptal</button>
+         </form>
+      </div>
+   </div>
+</div>
+}
+
 
