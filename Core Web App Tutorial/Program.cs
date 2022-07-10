@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-//https://docs.microsoft.com/tr-tr/aspnet/core/migration/50-to-60-samples?view=aspnetcore-5.0
+
 //Authorization config
 builder.Services.AddMvc(config =>
 {
@@ -55,13 +55,35 @@ app.UseAuthentication(); //Authentication'u çalýþtýrmak için yazmamýz gereken ko
 
 //Session Kullanma Komutu.
 //app.UseSession();
+
+
 app.UseRouting();
 
 
 app.UseAuthorization();
 
+
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapControllerRoute( //PresentationLayer'ýmýn içinde oluþturduðum areas klasörünü 404'ten kurtarmak için bir route belirlemem lazým. Burada o iþlemi gerçekleþtirdim.
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+
+
 app.Run();
+
+
+
+//https://docs.microsoft.com/tr-tr/aspnet/core/migration/50-to-60-samples?view=aspnetcore-5.0
+
+//app.UseEndpoints(endpoints => //Core 5.0'da yazýmý bu þekilde
+//{
+//    endpoints.MapControllerRoute(
+//           name: "areas",
+//           pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+//         );
+//});
