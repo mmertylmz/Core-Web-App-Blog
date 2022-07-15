@@ -1,0 +1,19 @@
+﻿@model Core_Web_App_Tutorial.Controllers.Class1
+@{
+    ViewData["Title"] = "EditEmployee";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>API ile Personel Güncelleme Sayfası</h1>
+<form method="post">
+    <label>ID</label>
+    @Html.TextBoxFor(x=>x.ID,new{@class="form-control"})
+    <br />
+    <label>Personel Adı Soyadı</label>
+    @Html.TextBoxFor(x=>x.Name,new{@class="form-control"})
+    <br />
+    <button class="btn btn-success">Güncelle</button>
+</form>
+@section scripts{
+
+}
