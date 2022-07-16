@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete
 {
-    public class Context: DbContext
+    public class Context: IdentityDbContext<AppUser,AppRole,int> //<add-migration yapıp Identity ilişkilendirmesi yapıyorum.>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,6 +29,12 @@ namespace DataAccessLayer.Concrete
                 .WithMany(y => y.WriterReceiver)
                 .HasForeignKey(z => z.ReceiverID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+            base.OnModelCreating(modelBuilder); //The entity type 'IdentityUserLogin<string>' requires a primary key to be defined.
+                                                //If you intended to use a keyless entity type, call 'HasNoKey' in 'OnModelCreating'.
+                                                //For more information on keyless entity types,
+                                                //see https://go.microsoft.com/fwlink/?linkid=2141943. Identity üzerinde add migration 
+                                                //yaparken hata almamak için yazılması gereken komut.
         }
 
         public DbSet<About> Abouts { get; set; }

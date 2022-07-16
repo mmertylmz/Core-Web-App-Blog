@@ -1,5 +1,7 @@
 //Libraries that I add.
 
+using DataAccessLayer.Concrete;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -31,8 +33,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         x.LoginPath = "/Login/Index";
     });
-    
 
+//Identity iþlemlerinin gerçekleþmesi için eklemem gereken servis yapýsý
+builder.Services.AddDbContext<Context>();
+builder.Services.AddIdentity<AppUser, AppRole>(x =>
+{
+    x.Password.RequireUppercase = false; //Þifrede büyük karakter girme zorunluluðu kalktý. asp-validation-summary'de bu kýsým gözükmeyecek.
+}).AddEntityFrameworkStores<Context>();
 
 //Insert your builder codes before this code below.
 var app = builder.Build();
